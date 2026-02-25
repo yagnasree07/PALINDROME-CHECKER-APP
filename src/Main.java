@@ -1,23 +1,24 @@
-public class PalindromeUC2 {
+import java.util.Scanner;
 
+public class PalindromeCheck {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
 
+        System.out.print("Enter a string: ");
+        String original = sc.nextLine();
 
-        System.out.println("=== UC2: Hardcoded Palindrome Check ===");
+        String reversed = "";
 
-
-        String word = "madam";
-
-
-        String reversed = new StringBuilder(word).reverse().toString();
-
-        if (word.equalsIgnoreCase(reversed)) {
-            System.out.println("Result: \"" + word + "\" is a Palindrome.");
-        } else {
-            System.out.println("Result: \"" + word + "\" is NOT a Palindrome.");
+        for(int i = original.length() - 1; i >= 0; i--) {
+            reversed = reversed + original.charAt(i);
         }
 
+        if(original.equals(reversed)) {
+            System.out.println("It is a Palindrome");
+        } else {
+            System.out.println("It is not a Palindrome");
+        }
 
-        System.out.println("Program Exits.");
+        sc.close();
     }
 }
