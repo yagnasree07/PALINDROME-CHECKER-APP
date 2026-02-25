@@ -1,20 +1,6 @@
 import java.util.Scanner;
 
-public class PalindromeRecursion {
-
-
-    static boolean isPalindrome(String str, int start, int end) {
-
-
-        if(start >= end)
-            return true;
-
-
-        if(str.charAt(start) != str.charAt(end))
-            return false;
-
-        return isPalindrome(str, start + 1, end - 1);
-    }
+public class PalindromeIgnoreCase {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -22,7 +8,23 @@ public class PalindromeRecursion {
         System.out.print("Enter a string: ");
         String input = sc.nextLine();
 
-        if(isPalindrome(input, 0, input.length() - 1))
+        input = input.toLowerCase();
+        input = input.replaceAll("[^a-z0-9]", "");
+
+        int start = 0;
+        int end = input.length() - 1;
+        boolean isPalindrome = true;
+
+        while(start < end) {
+            if(input.charAt(start) != input.charAt(end)) {
+                isPalindrome = false;
+                break;
+            }
+            start++;
+            end--;
+        }
+
+        if(isPalindrome)
             System.out.println("It is a Palindrome");
         else
             System.out.println("It is not a Palindrome");
