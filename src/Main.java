@@ -1,27 +1,25 @@
 import java.util.Scanner;
+import java.util.Stack;
 
-public class PalindromeCharArray {
+public class PalindromeStack {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        Stack<Character> stack = new Stack<>();
 
         System.out.print("Enter a string: ");
         String input = sc.nextLine();
 
+        for(int i = 0; i < input.length(); i++) {
+            stack.push(input.charAt(i));
+        }
 
-        char[] arr = input.toCharArray();
-
-        int start = 0;
-        int end = arr.length - 1;
         boolean isPalindrome = true;
 
-
-        while(start < end) {
-            if(arr[start] != arr[end]) {
+        for(int i = 0; i < input.length(); i++) {
+            if(input.charAt(i) != stack.pop()) {
                 isPalindrome = false;
                 break;
             }
-            start++;
-            end--;
         }
 
         if(isPalindrome) {
