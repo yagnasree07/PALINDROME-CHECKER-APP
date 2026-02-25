@@ -1,70 +1,28 @@
 import java.util.Scanner;
 
-public class PalindromeLinkedList {
+public class PalindromeRecursion {
 
-    static class Node {
-        char data;
-        Node next;
 
-        Node(char data) {
-            this.data = data;
-            this.next = null;
-        }
-    }
+    static boolean isPalindrome(String str, int start, int end) {
 
-    static Node reverse(Node head) {
-        Node prev = null;
-        Node current = head;
-        Node next = null;
 
-        while(current != null) {
-            next = current.next;
-            current.next = prev;
-            prev = current;
-            current = next;
-        }
-        return prev;
+        if(start >= end)
+            return true;
+
+
+        if(str.charAt(start) != str.charAt(end))
+            return false;
+
+        return isPalindrome(str, start + 1, end - 1);
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+
         System.out.print("Enter a string: ");
         String input = sc.nextLine();
 
-
-        Node head = null, tail = null;
-        for(char ch : input.toCharArray()) {
-            Node newNode = new Node(ch);
-            if(head == null) {
-                head = tail = newNode;
-            } else {
-                tail.next = newNode;
-                tail = newNode;
-            }
-        }
-
-        Node slow = head, fast = head;
-        while(fast != null && fast.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-
-        // Reverse second half
-        Node secondHalf = reverse(slow);
-        Node firstHalf = head;
-
-        boolean isPalindrome = true;
-
-        while(secondHalf != null) {
-            if(firstHalf.data != secondHalf.data) {
-                isPalindrome = false;
-                break;
-            }
-            firstHalf = firstHalf.next;
-            secondHalf = secondHalf.next;
-        }
-
-        if(isPalindrome)
+        if(isPalindrome(input, 0, input.length() - 1))
             System.out.println("It is a Palindrome");
         else
             System.out.println("It is not a Palindrome");
